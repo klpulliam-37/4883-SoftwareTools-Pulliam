@@ -1,2 +1,7 @@
 # 4883-SoftwareTools-Pulliam
-Contains assignments for Software Tools class at MSU Texas.
+## Kolten Pulliam
+#### Email: klpulliam44@gmail.com
+#### Image:
+![Kolten Pulliam](images/Home.jpg)
+#### Avatar:
+![Avatar](images/KL.png)
