@@ -1,0 +1,22 @@
+digraph BST {
+    node [shape=record]
+    
+    edge [color=red arrowtail=dot tailclip=false dir=both tailclip=false]
+    
+    A [label="<left> | <data> 25 | <right>"];
+    B [label="<left> | <data> 42 | <right>"];
+    C [label="<left> | <data> 37 | <right>"];
+    D [label="<left> | <data> 8 | <right>"];
+    E [label="<left> | <data> 64 | <right>"];
+    F [label="<left> | <data> 29 | <right>"];
+    G [label="<left> | <data> 28 | <right>"];
+    
+    F:right:c->B:data
+    F:left:c->A:data
+    
+    B:left:c->C:data
+    B:right:c->E:data
+    
+    A:left:c->D:data
+    A:right:c->G:data
+}
