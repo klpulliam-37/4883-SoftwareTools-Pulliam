@@ -6,5 +6,5 @@
 
 | Link                                                                                                    | Assignment Description |
 | ------------------------------------------------------------------------------------------------------- | ---------------------- |
-| [bst.dot](https://github.com/klpulliam-37/4883-SoftwareTools-Pulliam/tree/main/Assignments/A01/bst.dot) | Source code            |
-| [bst.png](https://github.com/klpulliam-37/4883-SoftwareTools-Pulliam/tree/main/Assignments/A01/bst.png) | Output image           |
+| [bst.dot](https://github.com/klpulliam-37/4883-SoftwareTools-Pulliam/tree/main/Assignments/A04/bst.dot) | Source code            |
+| [bst.png](https://github.com/klpulliam-37/4883-SoftwareTools-Pulliam/tree/main/Assignments/A04/bst.png) | Output image           |
