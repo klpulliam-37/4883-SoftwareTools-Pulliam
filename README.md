@@ -4,4 +4,4 @@
 #### Image:
 ![Kolten Pulliam](images/Home.jpg)
 #### Avatar:
-![Avatar](images/KL.png)
+![Avatar](images/guts_zoolander.jpg)
