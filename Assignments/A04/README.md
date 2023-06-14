@@ -2,7 +2,7 @@
 ### Kolten Pulliam
 
 ## Description
-### This file generates a binary search tree using the DOT/GV language. The output is generated using Graphviz.
+### This file generates a binary search tree using the DOT/GV language. The output is generated using Graphviz Online.
 
 | Link                                                                                                    | Assignment Description |
 | ------------------------------------------------------------------------------------------------------- | ---------------------- |

@@ -1,0 +1,242 @@
+digraph FamilyTree {
+	1 -> "1and0" [arrowhead=none]
+	0 -> "1and0" [arrowhead=none]
+	"1and0" -> 2
+	"1and0" -> 3
+	"1and0" -> 4
+	"1and0" -> 5
+	6 -> "6and2" [arrowhead=none]
+	2 -> "6and2" [arrowhead=none]
+	"6and2" -> 7
+	"6and2" -> 8
+	9 -> "9and4" [arrowhead=none]
+	4 -> "9and4" [arrowhead=none]
+	"9and4" -> 10
+	"9and4" -> 11
+	"9and4" -> 12
+	"9and4" -> 13
+	"9and4" -> 14
+	15 -> "15and10" [arrowhead=none]
+	10 -> "15and10" [arrowhead=none]
+	"15and10" -> 16
+	"15and10" -> 17
+	"15and10" -> 18
+	"15and10" -> 19
+	"15and10" -> 20
+	"15and10" -> 21
+	"15and10" -> 22
+	"15and10" -> 23
+	"15and10" -> 24
+	"15and10" -> 25
+	"15and10" -> 26
+	"15and10" -> 27
+	"15and10" -> 28
+	"15and10" -> 29
+	30 -> "30and21" [arrowhead=none]
+	21 -> "30and21" [arrowhead=none]
+	"30and21" -> 31
+	"30and21" -> 32
+	"30and21" -> 33
+	"30and21" -> 34
+	35 -> "35and33" [arrowhead=none]
+	33 -> "35and33" [arrowhead=none]
+	"35and33" -> 36
+	"35and33" -> 37
+	"35and33" -> 38
+	"35and33" -> 39
+	40 -> "40and39" [arrowhead=none]
+	39 -> "40and39" [arrowhead=none]
+	"40and39" -> 41
+	"40and39" -> 42
+	"40and39" -> 43
+	"40and39" -> 44
+	"40and39" -> 45
+	46 -> "46and44" [arrowhead=none]
+	44 -> "46and44" [arrowhead=none]
+	"46and44" -> 47
+	"46and44" -> 48
+	"46and44" -> 49
+	"46and44" -> 50
+	51 -> "51and50" [arrowhead=none]
+	50 -> "51and50" [arrowhead=none]
+	"51and50" -> 52
+	"51and50" -> 53
+	"51and50" -> 54
+	55 -> "55and53" [arrowhead=none]
+	53 -> "55and53" [arrowhead=none]
+	"55and53" -> 56
+	"55and53" -> 57
+	"55and53" -> 58
+	"55and53" -> 59
+	"55and53" -> 60
+	"55and53" -> 61
+	"55and53" -> 62
+	63 -> "63and61" [arrowhead=none]
+	61 -> "63and61" [arrowhead=none]
+	"63and61" -> 64
+	"63and61" -> 65
+	"63and61" -> 66
+	"63and61" -> 67
+	"63and61" -> 68
+	"63and61" -> 69
+	"63and61" -> 70
+	"63and61" -> 71
+	"63and61" -> 72
+	"63and61" -> 73
+	"63and61" -> 74
+	75 -> "75and68" [arrowhead=none]
+	68 -> "75and68" [arrowhead=none]
+	"75and68" -> 76
+	"75and68" -> 77
+	"75and68" -> 78
+	"75and68" -> 79
+	"75and68" -> 80
+	"75and68" -> 81
+	82 -> "82and79" [arrowhead=none]
+	79 -> "82and79" [arrowhead=none]
+	"82and79" -> 83
+	"82and79" -> 84
+	"82and79" -> 85
+	"82and79" -> 86
+	"82and79" -> 87
+	"82and79" -> 88
+	"82and79" -> 89
+	90 -> "90and85" [arrowhead=none]
+	85 -> "90and85" [arrowhead=none]
+	"90and85" -> 91
+	"90and85" -> 92
+	93 -> "93and91" [arrowhead=none]
+	91 -> "93and91" [arrowhead=none]
+	"93and91" -> 94
+	"93and91" -> 95
+	"93and91" -> 96
+	"93and91" -> 97
+	subgraph cluster_Uchiha {
+		color=purple style=filled
+		0 [label="{Name: | Born-Died: | Age: | Clan:} | {Rin Ito | 1000-1223 | 223 | Uchiha}" shape=record]
+		1 [label="{Name: | Born-Died: | Age: | Clan:} | {Chihiro Matsumoto | 990-1280 | 290 | Uchiha}" shape=record]
+		2 [label="{Name: | Born-Died: | Age: | Clan:} | {Makoto Ito | 1031-1107 | 76 | Uchiha}" shape=record]
+		3 [label="{Name: | Born-Died: | Age: | Clan:} | {Yukiko Ito | 1059-1289 | 230 | Uchiha}" shape=record]
+		4 [label="{Name: | Born-Died: | Age: | Clan:} | {Tomomi Ito | 1076-1370 | 294 | Uchiha}" shape=record]
+		5 [label="{Name: | Born-Died: | Age: | Clan:} | {Yutaka Ito | 1092-1304 | 212 | Uchiha}" shape=record]
+		6 [label="{Name: | Born-Died: | Age: | Clan:} | {Akemi Tang | 1014-1261 | 247 | Uchiha}" shape=record]
+		7 [label="{Name: | Born-Died: | Age: | Clan:} | {Zhen Tang | 1057-1175 | 118 | Uchiha}" shape=record]
+		8 [label="{Name: | Born-Died: | Age: | Clan:} | {Hana Tang | 1071-1275 | 204 | Uchiha}" shape=record]
+		9 [label="{Name: | Born-Died: | Age: | Clan:} | {Akemi Liu | 1090-1415 | 325 | Uchiha}" shape=record]
+		11 [label="{Name: | Born-Died: | Age: | Clan:} | {Ayane Ito | 1148-1403 | 255 | Uchiha}" shape=record]
+		12 [label="{Name: | Born-Died: | Age: | Clan:} | {first name Ito | 1167-1400 | 233 | Uchiha}" shape=record]
+		13 [label="{Name: | Born-Died: | Age: | Clan:} | {Aiko Ito | 1183-1442 | 259 | Uchiha}" shape=record]
+		14 [label="{Name: | Born-Died: | Age: | Clan:} | {Yoko Ito | 1224-1493 | 269 | Uchiha}" shape=record]
+		33 [label="{Name: | Born-Died: | Age: | Clan:} | {Hana Shi | 1263-1482 | 219 | Uchiha}" shape=record]
+		35 [label="{Name: | Born-Died: | Age: | Clan:} | {Sakura Zheng | 1272-1351 | 79 | Uchiha}" shape=record]
+		36 [label="{Name: | Born-Died: | Age: | Clan:} | {Kazumi Zheng | 1302-1602 | 300 | Uchiha}" shape=record]
+		37 [label="{Name: | Born-Died: | Age: | Clan:} | {Hana Zheng | 1314-1617 | 303 | Uchiha}" shape=record]
+		38 [label="{Name: | Born-Died: | Age: | Clan:} | {Ai Zheng | 1329-1573 | 244 | Uchiha}" shape=record]
+		"1and0" [label="" height=0.2 shape=diamond width=0.2]
+		"6and2" [label="" height=0.2 shape=diamond width=0.2]
+		"9and4" [label="" height=0.2 shape=diamond width=0.2]
+		"35and33" [label="" height=0.2 shape=diamond width=0.2]
+	}
+	subgraph cluster_Sarutobi {
+		color=blue style=filled
+		10 [label="{Name: | Born-Died: | Age: | Clan:} | {Hana Ito | 1121-1348 | 227 | Sarutobi}" shape=record]
+		15 [label="{Name: | Born-Died: | Age: | Clan:} | {Shiori Shi | 1107-1384 | 277 | Sarutobi}" shape=record]
+		16 [label="{Name: | Born-Died: | Age: | Clan:} | {Akito Shi | 1150-1409 | 259 | Sarutobi}" shape=record]
+		17 [label="{Name: | Born-Died: | Age: | Clan:} | {Kaori Shi | 1158-1179 | 21 | Sarutobi}" shape=record]
+		18 [label="{Name: | Born-Died: | Age: | Clan:} | {Chiyo Shi | 1170-1412 | 242 | Sarutobi}" shape=record]
+		19 [label="{Name: | Born-Died: | Age: | Clan:} | {Tomo Shi | 1179-1455 | 276 | Sarutobi}" shape=record]
+		20 [label="{Name: | Born-Died: | Age: | Clan:} | {Miyuki Shi | 1186-1347 | 161 | Sarutobi}" shape=record]
+		21 [label="{Name: | Born-Died: | Age: | Clan:} | {Satoshi Shi | 1196-1514 | 318 | Sarutobi}" shape=record]
+		22 [label="{Name: | Born-Died: | Age: | Clan:} | {Yoshio Shi | 1205-1420 | 215 | Sarutobi}" shape=record]
+		23 [label="{Name: | Born-Died: | Age: | Clan:} | {Yoko Shi | 1220-1466 | 246 | Sarutobi}" shape=record]
+		24 [label="{Name: | Born-Died: | Age: | Clan:} | {Umi Shi | 1234-1498 | 264 | Sarutobi}" shape=record]
+		25 [label="{Name: | Born-Died: | Age: | Clan:} | {Yoko Shi | 1251-1466 | 215 | Sarutobi}" shape=record]
+		26 [label="{Name: | Born-Died: | Age: | Clan:} | {Yuko Shi | 1263-1492 | 229 | Sarutobi}" shape=record]
+		27 [label="{Name: | Born-Died: | Age: | Clan:} | {Yuko Shi | 1274-1465 | 191 | Sarutobi}" shape=record]
+		28 [label="{Name: | Born-Died: | Age: | Clan:} | {Yoshiro Shi | 1288-1520 | 232 | Sarutobi}" shape=record]
+		29 [label="{Name: | Born-Died: | Age: | Clan:} | {Amaya Shi | 1334-1572 | 238 | Sarutobi}" shape=record]
+		30 [label="{Name: | Born-Died: | Age: | Clan:} | {Yoshiko Chen | 1199-1483 | 284 | Sarutobi}" shape=record]
+		31 [label="{Name: | Born-Died: | Age: | Clan:} | {Emi Shi | 1237-1504 | 267 | Sarutobi}" shape=record]
+		32 [label="{Name: | Born-Died: | Age: | Clan:} | {Kenta Shi | 1251-1498 | 247 | Sarutobi}" shape=record]
+		34 [label="{Name: | Born-Died: | Age: | Clan:} | {Takumi Shi | 1313-1605 | 292 | Sarutobi}" shape=record]
+		39 [label="{Name: | Born-Died: | Age: | Clan:} | {Satoshi Zheng | 1341-1603 | 262 | Sarutobi}" shape=record]
+		40 [label="{Name: | Born-Died: | Age: | Clan:} | {Akira Yang | 1331-1591 | 260 | Sarutobi}" shape=record]
+		41 [label="{Name: | Born-Died: | Age: | Clan:} | {Akito Yang | 1370-1699 | 329 | Sarutobi}" shape=record]
+		42 [label="{Name: | Born-Died: | Age: | Clan:} | {Kenji Yang | 1380-1606 | 226 | Sarutobi}" shape=record]
+		43 [label="{Name: | Born-Died: | Age: | Clan:} | {Noriko Yang | 1393-1634 | 241 | Sarutobi}" shape=record]
+		45 [label="{Name: | Born-Died: | Age: | Clan:} | {Rika Yang | 1480-1737 | 257 | Sarutobi}" shape=record]
+		"15and10" [label="" height=0.2 shape=diamond width=0.2]
+		"30and21" [label="" height=0.2 shape=diamond width=0.2]
+		"40and39" [label="" height=0.2 shape=diamond width=0.2]
+	}
+	subgraph cluster_Hyuga {
+		color=lightblue style=filled
+		44 [label="{Name: | Born-Died: | Age: | Clan:} | {Satoko Yang | 1403-1589 | 186 | Hyuga}" shape=record]
+		46 [label="{Name: | Born-Died: | Age: | Clan:} | {Kazuki Nakamura | 1390-1630 | 240 | Hyuga}" shape=record]
+		47 [label="{Name: | Born-Died: | Age: | Clan:} | {Aiko Nakamura | 1432-1703 | 271 | Hyuga}" shape=record]
+		48 [label="{Name: | Born-Died: | Age: | Clan:} | {Shinji Nakamura | 1441-1756 | 315 | Hyuga}" shape=record]
+		49 [label="{Name: | Born-Died: | Age: | Clan:} | {Yan Nakamura | 1456-1728 | 272 | Hyuga}" shape=record]
+		85 [label="{Name: | Born-Died: | Age: | Clan:} | {Kazuko Pan | 1890-1943 | 53 | Hyuga}" shape=record]
+		90 [label="{Name: | Born-Died: | Age: | Clan:} | {Chen He | 1882-2133 | 251 | Hyuga}" shape=record]
+		91 [label="{Name: | Born-Died: | Age: | Clan:} | {Hinata He | 1923-2109 | 186 | Hyuga}" shape=record]
+		92 [label="{Name: | Born-Died: | Age: | Clan:} | {Eiko He | 1934-2182 | 248 | Hyuga}" shape=record]
+		93 [label="{Name: | Born-Died: | Age: | Clan:} | {Shiori Ma | 1919-2168 | 249 | Hyuga}" shape=record]
+		94 [label="{Name: | Born-Died: | Age: | Clan:} | {Yoshiko He | 1952-2212 | 260 | Hyuga}" shape=record]
+		95 [label="{Name: | Born-Died: | Age: | Clan:} | {Umi He | 1985-2083 | 98 | Hyuga}" shape=record]
+		96 [label="{Name: | Born-Died: | Age: | Clan:} | {Yan He | 2007-2023 | 16 | Hyuga}" shape=record]
+		97 [label="{Name: | Born-Died: | Age: | Clan:} | {Natsumi He | 2033-2099 | 66 | Hyuga}" shape=record]
+		"46and44" [label="" height=0.2 shape=diamond width=0.2]
+		"90and85" [label="" height=0.2 shape=diamond width=0.2]
+		"93and91" [label="" height=0.2 shape=diamond width=0.2]
+	}
+	subgraph cluster_Uzamaki {
+		color=red style=filled
+		50 [label="{Name: | Born-Died: | Age: | Clan:} | {Isamu Nakamura | 1524-1797 | 273 | Uzamaki}" shape=record]
+		51 [label="{Name: | Born-Died: | Age: | Clan:} | {Tomomi Liu | 1497-1765 | 268 | Uzamaki}" shape=record]
+		52 [label="{Name: | Born-Died: | Age: | Clan:} | {Ren Liu | 1557-1646 | 89 | Uzamaki}" shape=record]
+		53 [label="{Name: | Born-Died: | Age: | Clan:} | {Fumiko Liu | 1571-1866 | 295 | Uzamaki}" shape=record]
+		54 [label="{Name: | Born-Died: | Age: | Clan:} | {Ayano Liu | 1601-1905 | 304 | Uzamaki}" shape=record]
+		55 [label="{Name: | Born-Died: | Age: | Clan:} | {Ichiro Inoue | 1572-1859 | 287 | Uzamaki}" shape=record]
+		56 [label="{Name: | Born-Died: | Age: | Clan:} | {Katsuhiro Inoue | 1606-1800 | 194 | Uzamaki}" shape=record]
+		57 [label="{Name: | Born-Died: | Age: | Clan:} | {Kanako Inoue | 1616-1906 | 290 | Uzamaki}" shape=record]
+		58 [label="{Name: | Born-Died: | Age: | Clan:} | {Asuka Inoue | 1625-1640 | 15 | Uzamaki}" shape=record]
+		59 [label="{Name: | Born-Died: | Age: | Clan:} | {Hana Inoue | 1640-1895 | 255 | Uzamaki}" shape=record]
+		60 [label="{Name: | Born-Died: | Age: | Clan:} | {Yoshiro Inoue | 1668-1899 | 231 | Uzamaki}" shape=record]
+		62 [label="{Name: | Born-Died: | Age: | Clan:} | {Akemi Inoue | 1696-1928 | 232 | Uzamaki}" shape=record]
+		79 [label="{Name: | Born-Died: | Age: | Clan:} | {Yoshio Yamaguchi | 1834-2108 | 274 | Uzamaki}" shape=record]
+		82 [label="{Name: | Born-Died: | Age: | Clan:} | {Kyoko Pan | 1825-2080 | 255 | Uzamaki}" shape=record]
+		83 [label="{Name: | Born-Died: | Age: | Clan:} | {Xia Pan | 1870-2150 | 280 | Uzamaki}" shape=record]
+		84 [label="{Name: | Born-Died: | Age: | Clan:} | {Ren Pan | 1880-2107 | 227 | Uzamaki}" shape=record]
+		86 [label="{Name: | Born-Died: | Age: | Clan:} | {Yan Pan | 1919-2118 | 199 | Uzamaki}" shape=record]
+		87 [label="{Name: | Born-Died: | Age: | Clan:} | {Noboru Pan | 1932-2174 | 242 | Uzamaki}" shape=record]
+		88 [label="{Name: | Born-Died: | Age: | Clan:} | {Yoshio Pan | 1948-2154 | 206 | Uzamaki}" shape=record]
+		89 [label="{Name: | Born-Died: | Age: | Clan:} | {Hitomi Pan | 1995-2232 | 237 | Uzamaki}" shape=record]
+		"51and50" [label="" height=0.2 shape=diamond width=0.2]
+		"55and53" [label="" height=0.2 shape=diamond width=0.2]
+		"82and79" [label="" height=0.2 shape=diamond width=0.2]
+	}
+	subgraph cluster_Senju {
+		color=yellow style=filled
+		61 [label="{Name: | Born-Died: | Age: | Clan:} | {Hina Inoue | 1679-1922 | 243 | Senju}" shape=record]
+		63 [label="{Name: | Born-Died: | Age: | Clan:} | {Xia Yamaguchi | 1667-1952 | 285 | Senju}" shape=record]
+		64 [label="{Name: | Born-Died: | Age: | Clan:} | {Mio Yamaguchi | 1714-1950 | 236 | Senju}" shape=record]
+		65 [label="{Name: | Born-Died: | Age: | Clan:} | {Megumi Yamaguchi | 1721-2056 | 335 | Senju}" shape=record]
+		66 [label="{Name: | Born-Died: | Age: | Clan:} | {Yumi Yamaguchi | 1734-1947 | 213 | Senju}" shape=record]
+		67 [label="{Name: | Born-Died: | Age: | Clan:} | {Yoshiro Yamaguchi | 1746-2028 | 282 | Senju}" shape=record]
+		68 [label="{Name: | Born-Died: | Age: | Clan:} | {Umi Yamaguchi | 1757-2027 | 270 | Senju}" shape=record]
+		69 [label="{Name: | Born-Died: | Age: | Clan:} | {Kazumi Yamaguchi | 1768-2081 | 313 | Senju}" shape=record]
+		70 [label="{Name: | Born-Died: | Age: | Clan:} | {Noboru Yamaguchi | 1778-1970 | 192 | Senju}" shape=record]
+		71 [label="{Name: | Born-Died: | Age: | Clan:} | {Eiko Yamaguchi | 1787-2039 | 252 | Senju}" shape=record]
+		72 [label="{Name: | Born-Died: | Age: | Clan:} | {Akemi Yamaguchi | 1799-1982 | 183 | Senju}" shape=record]
+		73 [label="{Name: | Born-Died: | Age: | Clan:} | {Wei Yamaguchi | 1821-1898 | 77 | Senju}" shape=record]
+		74 [label="{Name: | Born-Died: | Age: | Clan:} | {Umi Yamaguchi | 1839-2102 | 263 | Senju}" shape=record]
+		75 [label="{Name: | Born-Died: | Age: | Clan:} | {Shinji Zhou | 1770-2074 | 304 | Senju}" shape=record]
+		76 [label="{Name: | Born-Died: | Age: | Clan:} | {Wei Yamaguchi | 1796-2049 | 253 | Senju}" shape=record]
+		77 [label="{Name: | Born-Died: | Age: | Clan:} | {Shiori Yamaguchi | 1805-2048 | 243 | Senju}" shape=record]
+		78 [label="{Name: | Born-Died: | Age: | Clan:} | {Sayuri Yamaguchi | 1819-2054 | 235 | Senju}" shape=record]
+		80 [label="{Name: | Born-Died: | Age: | Clan:} | {Rika Yamaguchi | 1853-2065 | 212 | Senju}" shape=record]
+		81 [label="{Name: | Born-Died: | Age: | Clan:} | {Ayumi Yamaguchi | 1872-2115 | 243 | Senju}" shape=record]
+		"63and61" [label="" height=0.2 shape=diamond width=0.2]
+		"75and68" [label="" height=0.2 shape=diamond width=0.2]
+	}
+}
