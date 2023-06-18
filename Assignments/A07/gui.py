@@ -8,7 +8,9 @@ TODO:
     - The year drop down box should have the values ??-2023.
     - The filter drop down box should have the values 'daily', 'weekly', 'monthly'.
 """
-import PySimpleGUI as sg      
+import PySimpleGUI as sg  
+from codes import parse_codes
+import json
 
 def currentDate(returnType='tuple'):
     """ Get the current date and return it as a tuple, list, or dictionary.
@@ -46,16 +48,18 @@ def buildWeatherURL(month=None, day=None, year=None, airport=None, filter=None):
     if not year:
         year = current_year
 
-    filters = ['daily', 'weekly', 'monthly']
+    codes = parse_codes()
+    codes_combo = sg.Combo(codes[1:], font=('Arial Bold', 14),  expand_x=True, enable_events=True,  readonly=False, key='-CODES-')
 
-    lst = sg.Combo(filters, font=('Arial Bold', 14),  expand_x=True, enable_events=True,  readonly=False, key='-COMBO-')
+    filters = ['daily', 'weekly', 'monthly']
+    lst = sg.Combo(filters, font=('Arial Bold', 14),  expand_x=True, enable_events=True,  readonly=False, key='-FILTERS-')
     
     # Create the gui's layout using text boxes that allow for user input without checking for valid input
     layout = [
         [sg.Text('Month')],[sg.InputText(month)],
         [sg.Text('Day')],[sg.InputText(day)],
         [sg.Text('Year')],[sg.InputText(year)],
-        [sg.Text('Code')],[sg.InputText()],
+        [sg.Text('Code')],[codes_combo],
         [sg.Text('Daily / Weekly / Monthly')],[lst],
         [sg.Submit(key='-SUBMIT-'), sg.Cancel(key='-CANCEL-')]
     ]      
@@ -65,11 +69,15 @@ def buildWeatherURL(month=None, day=None, year=None, airport=None, filter=None):
     while True:
         event, values = window.read()
         # print(event, values)
-        if event in (sg.WIN_CLOSED, 'Exit') or event == '-CANCEL-':
-            window.close()
+        if event in (sg.WIN_CLOSED, 'Exit'):
+            values = None
+            break
         # if event == '-COMBO-':
         #     print("combo")
         if event == '-SUBMIT-':
+            break
+        if event == '-CANCEL-':
+            values = None
             break
     window.close()
 
@@ -77,8 +85,8 @@ def buildWeatherURL(month=None, day=None, year=None, airport=None, filter=None):
         month = values[0]
         day = values[1]
         year = values[2]
-        code = values[3]
-        filter = values['-COMBO-']
+        code = values['-CODES-']
+        filter = values['-FILTERS-']
 
         link = f'https://www.wunderground.com/history/{filter}/{code}/date/{year}-{month}-{day}'
 
@@ -88,8 +96,69 @@ def buildWeatherURL(month=None, day=None, year=None, airport=None, filter=None):
     else:
         sg.popup('Farewell')
 
-    # return the URL to pass to wunderground to get appropriate weather data
+def displayResults():
+    toprow = []
+    rows = [['date', 
+             ['max', 'avg', 'min'], 
+             ['max', 'avg', 'min'], 
+             ['max', 'avg', 'min'], 
+             ['max', 'avg', 'min'], 
+             ['max', 'avg', 'min'], 
+             'total']]
+
+    with open('wunder_weekly.json') as results:
+        observations = json.load(results)
+    
+    for key in observations.keys():
+        toprow.append(key)
+    
+    # print(toprow)
+
+
+    # for each row, we need to add the corrisponding element
+    # accross each category.
+
+    for i in range(0,7):
+        # print(observations['time'][i])
+        rows.append([
+            observations['time'][i], 
+            [observations['temp']['max'][i], observations['temp']['avg'][i], observations['temp']['min'][i]],
+            [observations['dew']['max'][i], observations['dew']['avg'][i], observations['dew']['min'][i]],
+            [observations['humidity']['max'][i], observations['humidity']['avg'][i], observations['humidity']['min'][i]],
+            [observations['wind']['max'][i], observations['wind']['avg'][i], observations['wind']['min'][i]],
+            [observations['pressure']['max'][i], observations['pressure']['avg'][i], observations['pressure']['min'][i]],
+            observations['precipitation'][i]
+        ])
+
+            
+
+    
+    sg.set_options(font=("Arial Bold", 14))
+    tbl1 = sg.Table(values=rows, headings=toprow,
+    auto_size_columns=False,
+    col_widths=15,
+    display_row_numbers=False,
+    justification='center', key='-TABLE-',
+    alternating_row_color='lightblue',
+    selected_row_colors='red on yellow',
+    enable_events=True,
+    expand_x=True,
+    expand_y=True,
+    enable_click_events=True)
+    layout = [[tbl1]]
+    window = sg.Window("Table Demo", layout, size=(1200, 500), resizable=True)
+    while True:
+        event, values = window.read()
+        print("event:", event, "values:", values)
+        if event == sg.WIN_CLOSED:
+            break
+        # if '+CLICKED+' in event:
+        #     sg.popup("You clicked row:{} Column: {}".format(event[2][0], event[2][1]))
+    window.close()
+    
+
 
 if __name__=='__main__':
-    url = buildWeatherURL()
+    # url = buildWeatherURL()
     # print(url)
+    displayResults()

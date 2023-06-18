@@ -153,12 +153,12 @@ def parse_weekly(tables):
             for data_tag in data_tags:
                 # print(data_tag.get_text())
                 if i_cat == 0:
-                    observations["time"].append(data_tag.get_text())
+                    observations["time"].append(data_tag.get_text().strip())
                 elif i_cat > 0 and i_cat < 6:
-                    observations[categories[i_cat]][tags[i_tag]].append(data_tag.get_text())
+                    observations[categories[i_cat]][tags[i_tag]].append(data_tag.get_text().strip())
                     i_tag += 1
                 else:
-                    observations["precipitation"].append(data_tag.get_text())
+                    observations["precipitation"].append(data_tag.get_text().strip())
             i_tag = 0
         # print("Table " + str(i) + ":")
         # print_list(rows)

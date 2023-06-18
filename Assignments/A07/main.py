@@ -17,4 +17,6 @@ if __name__=='__main__':
 
     tables = tbody[0].find_all("table")
 
+    
+
     parse_weekly(tables)
