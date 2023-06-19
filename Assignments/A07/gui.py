@@ -96,7 +96,10 @@ def buildWeatherURL(month=None, day=None, year=None, airport=None, filter=None):
     else:
         sg.popup('Farewell')
 
-def displayResults():
+def create_table():
+    pass
+
+def display_results():
     toprow = []
     rows = [['date', 
              ['max', 'avg', 'min'], 
@@ -161,4 +164,4 @@ def displayResults():
 if __name__=='__main__':
     # url = buildWeatherURL()
     # print(url)
-    displayResults()
+    display_results()

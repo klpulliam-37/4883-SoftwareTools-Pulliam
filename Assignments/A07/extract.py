@@ -61,7 +61,90 @@ def print_list(html_data_list):
     else:
         print("There were no matches for the search")
 
-def parse_weekly(tables):
+def parse_daily(tbody):
+    cat = {
+        1: "time",
+        2: "temp",
+        3: "dew",
+        4: "humidity",
+        5: "wind",
+        6: "wspeed",
+        7: "wgust",
+        8: "pressure",
+        9: "precip",
+        10: "condition"
+    }
+
+    observations = {
+        "time": [
+
+        ],
+        "temp": [
+
+        ],
+        "dew": [
+
+        ],
+        "humidity": [
+
+        ],
+        "wind": [
+
+        ],
+        "wspeed": [
+
+        ],
+        "wgust": [
+
+        ],
+        "pressure": [
+
+        ],
+        "precip": [
+
+        ],
+        "condition": [
+
+        ]
+    }
+
+    # There are fifty table rows (<tr>).
+
+    # For each row, there is ten columns (<td>).
+
+    # For the first, fifth, and tenth columns in each row,
+    # there is only one <span> element.
+
+    # For the second, third, fourth, sixth, seventh, eigth, and ninth columns, it goes <lib-display-unit> -> <span> -> <span>.
+    # The value will be in the second <span> element.
+
+    rows = tbody.find_all("tr") 
+
+    r = 0
+    c = 1
+    for row in rows:
+        columns = row.find_all("td")
+        for column in columns:
+            if c == 1 or c == 5 or c == 10:
+                data_tag = column.find("span")
+                observations[cat[c]].append(data_tag.get_text().strip())
+            if c >= 2 and c <= 4 or c >= 6 and c <= 9:
+                lib = column.find("lib-display-unit")
+                span = lib.find("span")
+                data_tag = span.find("span")
+                observations[cat[c]].append(data_tag.get_text().strip())
+            c += 1
+        c = 1
+        r += 1 # just for checking number of rows in table since they vary
+    print(f"There are {r} row(s)")
+
+    with open("wunder_daily.json","w") as f:
+        json.dump(observations,f,indent=4)
+
+    
+
+
+def parse_weekly(html):
     categories = {
         0: "time",
         1: "temp",
@@ -144,7 +227,7 @@ def parse_weekly(tables):
 
     i_cat = 0
     i_tag = 0
-    for table in tables:
+    for table in html:
         rows = table.find_all("tr")
 
 
@@ -165,41 +248,37 @@ def parse_weekly(tables):
         # i += 1
         i_cat += 1
 
-        # Need to update this so it stores file in proper directory
-        with open("wunder_weekly.json","w") as f:
-            json.dump(observations,f,indent=4)
+    # Need to update this so it stores file in proper directory
+    with open("wunder_weekly.json","w") as f:
+        json.dump(observations,f,indent=4)
 
-    # Iterate over each row in each category of the table
 
     
 if __name__=='__main__':
 
     # Could be a good idea to use the buildWeatherURL function from gui.py
-    url = 'http://www.wunderground.com/history/weekly/KCHO/date/2020-12-31'
+    url_daily = 'http://www.wunderground.com/history/daily/KCHO/date/2020-12-31'
+    # url_weekly = 'http://www.wunderground.com/history/weekly/KCHO/date/2020-12-31'
+
 
     # get the page source HTML from the URL
-    page = asyncGetWeather(url)
+    page = asyncGetWeather(url_daily)
 
     # parse the HTML
     soup = BeautifulSoup(page, 'html.parser')
-    
-    # find the appropriate tag that contains the weather data
+
     history = soup.find_all('lib-city-history-observation')
-    # history = soup.find(attrs={"class" : "observation-table ng-star-inserted"})
-    # history = soup.find_all('tr', has_ngcontent)
-    # history_list = soup.find_all("table")
 
-    # table = history.find_all("tbody")
+    # DAILY 
+    table = history[0].find('table')
 
-    tbody = history[0].find_all("tbody")
+    tbody = table.find('tbody')
 
-    tables = tbody[0].find_all("table")
-
+    parse_daily(tbody)
     
+    # WEEKLY
+    # tbody = history[0].find_all("tbody")
 
+    # tables = tbody[0].find_all("table")
 
-    # print the parsed HTML
-    parse_weekly(tables)
-    # print_list(history)
-    # print_list(tbody)
-    # print_list(tables)
+    # parse_weekly(tables)
