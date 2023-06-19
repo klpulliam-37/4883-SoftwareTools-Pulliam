@@ -96,46 +96,7 @@ def buildWeatherURL(month=None, day=None, year=None, airport=None, filter=None):
     else:
         sg.popup('Farewell')
 
-def create_table():
-    pass
-
-def display_results():
-    toprow = []
-    rows = [['date', 
-             ['max', 'avg', 'min'], 
-             ['max', 'avg', 'min'], 
-             ['max', 'avg', 'min'], 
-             ['max', 'avg', 'min'], 
-             ['max', 'avg', 'min'], 
-             'total']]
-
-    with open('wunder_weekly.json') as results:
-        observations = json.load(results)
-    
-    for key in observations.keys():
-        toprow.append(key)
-    
-    # print(toprow)
-
-
-    # for each row, we need to add the corrisponding element
-    # accross each category.
-
-    for i in range(0,7):
-        # print(observations['time'][i])
-        rows.append([
-            observations['time'][i], 
-            [observations['temp']['max'][i], observations['temp']['avg'][i], observations['temp']['min'][i]],
-            [observations['dew']['max'][i], observations['dew']['avg'][i], observations['dew']['min'][i]],
-            [observations['humidity']['max'][i], observations['humidity']['avg'][i], observations['humidity']['min'][i]],
-            [observations['wind']['max'][i], observations['wind']['avg'][i], observations['wind']['min'][i]],
-            [observations['pressure']['max'][i], observations['pressure']['avg'][i], observations['pressure']['min'][i]],
-            observations['precipitation'][i]
-        ])
-
-            
-
-    
+def create_table(toprow, rows):
     sg.set_options(font=("Arial Bold", 14))
     tbl1 = sg.Table(values=rows, headings=toprow,
     auto_size_columns=False,
@@ -158,10 +119,71 @@ def display_results():
         # if '+CLICKED+' in event:
         #     sg.popup("You clicked row:{} Column: {}".format(event[2][0], event[2][1]))
     window.close()
+
+def display_daily_results():
+    toprow = []
+    rows = []
+
+    with open('wunder_daily.json') as results:
+        observations = json.load(results)
+    
+    for key in observations.keys():
+        toprow.append(key)
+
+    for i in range(0, len(observations["time"])):
+        rows.append([
+            observations["time"][i],
+            observations["temp"][i],
+            observations["dew"][i],
+            observations["humidity"][i],
+            observations["wind"][i],
+            observations["wspeed"][i],
+            observations["wgust"][i],
+            observations["pressure"][i],
+            observations["precip"][i],
+            observations["condition"][i]
+        ])
+
+    create_table(toprow, rows)
+
+def display_weekly_results():
+    toprow = []
+    rows = [['date', 
+             ['max', 'avg', 'min'], 
+             ['max', 'avg', 'min'], 
+             ['max', 'avg', 'min'], 
+             ['max', 'avg', 'min'], 
+             ['max', 'avg', 'min'], 
+             'total']]
+
+    with open('wunder_weekly.json') as results:
+        observations = json.load(results)
+    
+    for key in observations.keys():
+        toprow.append(key)
+
+    # for each row, we need to add the corrisponding element accross each category.
+    # Might have to get the number of rows by counting the number of time entries.
+    for i in range(0,7):
+        rows.append([
+            observations['time'][i], 
+            [observations['temp']['max'][i], observations['temp']['avg'][i], observations['temp']['min'][i]],
+            [observations['dew']['max'][i], observations['dew']['avg'][i], observations['dew']['min'][i]],
+            [observations['humidity']['max'][i], observations['humidity']['avg'][i], observations['humidity']['min'][i]],
+            [observations['wind']['max'][i], observations['wind']['avg'][i], observations['wind']['min'][i]],
+            [observations['pressure']['max'][i], observations['pressure']['avg'][i], observations['pressure']['min'][i]],
+            observations['precipitation'][i]
+        ])
+
+    create_table(toprow, rows)
+
+    
+    
     
 
 
 if __name__=='__main__':
     # url = buildWeatherURL()
     # print(url)
-    display_results()
+    display_daily_results()
+    # display_weekly_results()
