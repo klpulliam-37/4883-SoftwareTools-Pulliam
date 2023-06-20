@@ -2,7 +2,6 @@ from gui import buildWeatherURL
 from extract import asyncGetWeather
 from extract import parse_daily
 from extract import parse_weekly_monthly
-# from bs4 import BeautifulSoup   
 
 if __name__=='__main__':
     # Get the url from the user

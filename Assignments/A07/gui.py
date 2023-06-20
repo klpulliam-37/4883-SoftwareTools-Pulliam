@@ -1,12 +1,7 @@
 """ 
 Description:
-    This is an example gui that allows you to enter the appropriate parameters to get the weather from wunderground.
-TODO:
-    - You will need to change the text input boxes to drop down boxes and add the appropriate values to the drop down boxes.
-    - For example the month drop down box should have the values 1-12.
-    - The day drop down box should have the values 1-31.
-    - The year drop down box should have the values ??-2023.
-    - The filter drop down box should have the values 'daily', 'weekly', 'monthly'.
+    This is an example gui that allows you to enter the appropriate 
+    parameters to get the weather from wunderground.
 """
 import PySimpleGUI as sg  
 from codes import parse_codes
@@ -48,17 +43,30 @@ def buildWeatherURL(month=None, day=None, year=None, airport=None, filter=None):
     if not year:
         year = current_year
 
+    days = [i for i in range(1, 32)]
+    # print(days)
+    days_combo = sg.Combo(days, font=('Arial Bold', 14),  expand_x=True, enable_events=True,  readonly=False, key='-DAYS-')
+
+    months = [i for i in range(1, 13)]
+    # print(months)
+    months_combo = sg.Combo(months, font=('Arial Bold', 14),  expand_x=True, enable_events=True,  readonly=False, key='-MONTHS-')
+
+    years = [i for i in range(1990, 2024)]
+    # print(years)
+    years_combo = sg.Combo(years, font=('Arial Bold', 14),  expand_x=True, enable_events=True,  readonly=False, key='-YEARS-')
+
     codes = parse_codes()
     codes_combo = sg.Combo(codes[1:], font=('Arial Bold', 14),  expand_x=True, enable_events=True,  readonly=False, key='-CODES-')
 
     filters = ['daily', 'weekly', 'monthly']
     lst = sg.Combo(filters, font=('Arial Bold', 14),  expand_x=True, enable_events=True,  readonly=False, key='-FILTERS-')
     
-    # Create the gui's layout using text boxes that allow for user input without checking for valid input
+    # Create the gui's layout using text boxes that allow 
+    # for user input without checking for valid input.
     layout = [
-        [sg.Text('Month')],[sg.InputText(month)],
-        [sg.Text('Day')],[sg.InputText(day)],
-        [sg.Text('Year')],[sg.InputText(year)],
+        [sg.Text('Month')],[months_combo],
+        [sg.Text('Day')],[days_combo],
+        [sg.Text('Year')],[years_combo],
         [sg.Text('Code')],[codes_combo],
         [sg.Text('Daily / Weekly / Monthly')],[lst],
         [sg.Submit(key='-SUBMIT-'), sg.Cancel(key='-CANCEL-')]
@@ -66,14 +74,13 @@ def buildWeatherURL(month=None, day=None, year=None, airport=None, filter=None):
 
     window = sg.Window('Get The Weather', layout)    
 
+    # Start the event loop
     while True:
         event, values = window.read()
         # print(event, values)
         if event in (sg.WIN_CLOSED, 'Exit'):
             values = None
             break
-        # if event == '-COMBO-':
-        #     print("combo")
         if event == '-SUBMIT-':
             break
         if event == '-CANCEL-':
@@ -82,9 +89,9 @@ def buildWeatherURL(month=None, day=None, year=None, airport=None, filter=None):
     window.close()
 
     if values:
-        month = values[0]
-        day = values[1]
-        year = values[2]
+        month = values['-MONTHS-']
+        day = values['-DAYS-']
+        year = values['-YEARS-']
         code = values['-CODES-']
         filter = values['-FILTERS-']
 
@@ -116,8 +123,6 @@ def create_table(table_name, toprow, rows):
         print("event:", event, "values:", values)
         if event == sg.WIN_CLOSED:
             break
-        # if '+CLICKED+' in event:
-        #     sg.popup("You clicked row:{} Column: {}".format(event[2][0], event[2][1]))
     window.close()
 
 def display_daily_results():
@@ -168,8 +173,7 @@ def display_weekly_monthly_results(filter):
     for key in observations.keys():
         toprow.append(key)
 
-    # for each row, we need to add the corrisponding element accross each category.
-    # Might have to get the number of rows by counting the number of time entries.
+    # For each row, add the corrisponding element accross each category.
     for i in range(0, len(observations["time"])):
         rows.append([
             observations['time'][i], 
@@ -188,13 +192,10 @@ def display_weekly_monthly_results(filter):
     else:
         print("Invalid filter type given for table creation.")
 
-    
-    
-    
-
-
+# Testing
 if __name__=='__main__':
+    pass
     # url = buildWeatherURL()
     # print(url)
     # display_daily_results()
-    display_weekly_monthly_results("m")
+    # display_weekly_monthly_results("m")
