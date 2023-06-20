@@ -144,7 +144,7 @@ def parse_daily(tbody):
     
 
 
-def parse_weekly(html):
+def parse_weekly_monthly(tables, filter):
     categories = {
         0: "time",
         1: "temp",
@@ -227,7 +227,7 @@ def parse_weekly(html):
 
     i_cat = 0
     i_tag = 0
-    for table in html:
+    for table in tables:
         rows = table.find_all("tr")
 
 
@@ -248,21 +248,29 @@ def parse_weekly(html):
         # i += 1
         i_cat += 1
 
-    # Need to update this so it stores file in proper directory
-    with open("wunder_weekly.json","w") as f:
-        json.dump(observations,f,indent=4)
+    if filter == "w":
+        # Need to update this so it stores file in proper directory
+        with open("wunder_weekly.json","w") as f:
+            json.dump(observations,f,indent=4)
+    elif filter == "m":
+        # Need to update this so it stores file in proper directory
+        with open("wunder_monthly.json","w") as f:
+            json.dump(observations,f,indent=4)
+    else:
+        print("A valid filter type was not provided.")
 
 
     
 if __name__=='__main__':
 
     # Could be a good idea to use the buildWeatherURL function from gui.py
-    url_daily = 'http://www.wunderground.com/history/daily/KCHO/date/2020-12-31'
+    # url_daily = 'http://www.wunderground.com/history/daily/KCHO/date/2020-12-31'
     # url_weekly = 'http://www.wunderground.com/history/weekly/KCHO/date/2020-12-31'
+    url_monthly = 'http://www.wunderground.com/history/monthly/KCHO/date/2020-12-31'
 
 
     # get the page source HTML from the URL
-    page = asyncGetWeather(url_daily)
+    page = asyncGetWeather(url_monthly)
 
     # parse the HTML
     soup = BeautifulSoup(page, 'html.parser')
@@ -270,15 +278,15 @@ if __name__=='__main__':
     history = soup.find_all('lib-city-history-observation')
 
     # DAILY 
-    table = history[0].find('table')
+    # table = history[0].find('table')
 
-    tbody = table.find('tbody')
+    # tbody = table.find('tbody')
 
-    parse_daily(tbody)
+    # parse_daily(tbody)
     
-    # WEEKLY
-    # tbody = history[0].find_all("tbody")
+    # WEEKLY and MONTHLY
+    tbody = history[0].find_all("tbody")
 
-    # tables = tbody[0].find_all("table")
+    tables = tbody[0].find_all("table")
 
-    # parse_weekly(tables)
+    parse_weekly_monthly(tables, "m")

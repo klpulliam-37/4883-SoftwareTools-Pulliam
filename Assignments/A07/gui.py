@@ -146,7 +146,7 @@ def display_daily_results():
 
     create_table(toprow, rows)
 
-def display_weekly_results():
+def display_weekly_monthly_results(filter):
     toprow = []
     rows = [['date', 
              ['max', 'avg', 'min'], 
@@ -156,15 +156,21 @@ def display_weekly_results():
              ['max', 'avg', 'min'], 
              'total']]
 
-    with open('wunder_weekly.json') as results:
-        observations = json.load(results)
+    if filter == "w":
+        with open('wunder_weekly.json') as results:
+            observations = json.load(results)
+    elif filter == "m":
+        with open('wunder_monthly.json') as results:
+            observations = json.load(results)
+    else:
+        print("Invalid filter type given.")
     
     for key in observations.keys():
         toprow.append(key)
 
     # for each row, we need to add the corrisponding element accross each category.
     # Might have to get the number of rows by counting the number of time entries.
-    for i in range(0,7):
+    for i in range(0, len(observations["time"])):
         rows.append([
             observations['time'][i], 
             [observations['temp']['max'][i], observations['temp']['avg'][i], observations['temp']['min'][i]],
@@ -185,5 +191,5 @@ def display_weekly_results():
 if __name__=='__main__':
     # url = buildWeatherURL()
     # print(url)
-    display_daily_results()
-    # display_weekly_results()
+    # display_daily_results()
+    display_weekly_monthly_results("m")
