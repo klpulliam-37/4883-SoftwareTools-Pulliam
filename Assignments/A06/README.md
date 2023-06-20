@@ -15,5 +15,5 @@
 
 ## Examples
 ### 3D Terminal Game (by KayOS Code)
-<img src="images/ncursesgame.gif"  width=720>
+<img src="images/ncursesgame.gif"  width=960>
 <!-- ![NCURSES 3D Game](images/ncursesgame.gif) -->
