@@ -92,11 +92,11 @@ def buildWeatherURL(month=None, day=None, year=None, airport=None, filter=None):
 
         sg.popup('You entered', f"Month: {month}, Day: {day}, Year: {year}, Code: {code}, Filter: {filter}")
 
-        return link
+        return {"link": link, "filter": filter}
     else:
         sg.popup('Farewell')
 
-def create_table(toprow, rows):
+def create_table(table_name, toprow, rows):
     sg.set_options(font=("Arial Bold", 14))
     tbl1 = sg.Table(values=rows, headings=toprow,
     auto_size_columns=False,
@@ -110,7 +110,7 @@ def create_table(toprow, rows):
     expand_y=True,
     enable_click_events=True)
     layout = [[tbl1]]
-    window = sg.Window("Table Demo", layout, size=(1200, 500), resizable=True)
+    window = sg.Window(table_name, layout, size=(1200, 500), resizable=True)
     while True:
         event, values = window.read()
         print("event:", event, "values:", values)
@@ -144,7 +144,7 @@ def display_daily_results():
             observations["condition"][i]
         ])
 
-    create_table(toprow, rows)
+    create_table("Daily Observations", toprow, rows)
 
 def display_weekly_monthly_results(filter):
     toprow = []
@@ -163,7 +163,7 @@ def display_weekly_monthly_results(filter):
         with open('wunder_monthly.json') as results:
             observations = json.load(results)
     else:
-        print("Invalid filter type given.")
+        print("Invalid filter type given for loading file.")
     
     for key in observations.keys():
         toprow.append(key)
@@ -181,7 +181,12 @@ def display_weekly_monthly_results(filter):
             observations['precipitation'][i]
         ])
 
-    create_table(toprow, rows)
+    if filter == "w":
+        create_table("Weekly Observations", toprow, rows)
+    elif filter == "m":
+        create_table("Monthly Observations", toprow, rows)
+    else:
+        print("Invalid filter type given for table creation.")
 
     
     

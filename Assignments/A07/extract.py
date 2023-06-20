@@ -6,6 +6,8 @@ The program then prints the parsed HTML to the console.
 
 import time                                             # needed for the sleep function
 import json
+from gui import display_daily_results
+from gui import display_weekly_monthly_results
 
 from bs4 import BeautifulSoup                           # used to parse the HTML
 from selenium import webdriver                          # used to render the web page
@@ -61,7 +63,16 @@ def print_list(html_data_list):
     else:
         print("There were no matches for the search")
 
-def parse_daily(tbody):
+def parse_daily(page):
+    # parse the HTML
+    soup = BeautifulSoup(page, 'html.parser')
+
+    history = soup.find_all('lib-city-history-observation')
+
+    table = history[0].find('table')
+
+    tbody = table.find('tbody')
+
     cat = {
         1: "time",
         2: "temp",
@@ -108,19 +119,9 @@ def parse_daily(tbody):
         ]
     }
 
-    # There are fifty table rows (<tr>).
-
-    # For each row, there is ten columns (<td>).
-
-    # For the first, fifth, and tenth columns in each row,
-    # there is only one <span> element.
-
-    # For the second, third, fourth, sixth, seventh, eigth, and ninth columns, it goes <lib-display-unit> -> <span> -> <span>.
-    # The value will be in the second <span> element.
-
     rows = tbody.find_all("tr") 
 
-    r = 0
+    # r = 0
     c = 1
     for row in rows:
         columns = row.find_all("td")
@@ -135,16 +136,27 @@ def parse_daily(tbody):
                 observations[cat[c]].append(data_tag.get_text().strip())
             c += 1
         c = 1
-        r += 1 # just for checking number of rows in table since they vary
-    print(f"There are {r} row(s)")
+        # r += 1 # just for checking number of rows in table since they vary
+    # print(f"There are {r} row(s)")
 
     with open("wunder_daily.json","w") as f:
         json.dump(observations,f,indent=4)
+    
+    display_daily_results()
 
     
 
 
-def parse_weekly_monthly(tables, filter):
+def parse_weekly_monthly(page, filter):
+    # parse the HTML
+    soup = BeautifulSoup(page, 'html.parser')
+
+    history = soup.find_all('lib-city-history-observation')
+
+    tbody = history[0].find_all("tbody")
+
+    tables = tbody[0].find_all("table")
+
     categories = {
         0: "time",
         1: "temp",
@@ -252,10 +264,12 @@ def parse_weekly_monthly(tables, filter):
         # Need to update this so it stores file in proper directory
         with open("wunder_weekly.json","w") as f:
             json.dump(observations,f,indent=4)
+        display_weekly_monthly_results("w")
     elif filter == "m":
         # Need to update this so it stores file in proper directory
         with open("wunder_monthly.json","w") as f:
             json.dump(observations,f,indent=4)
+        display_weekly_monthly_results("m")
     else:
         print("A valid filter type was not provided.")
 
