@@ -72,7 +72,7 @@ def buildWeatherURL(month=None, day=None, year=None, airport=None, filter=None):
         [sg.Submit(key='-SUBMIT-'), sg.Cancel(key='-CANCEL-')]
     ]      
 
-    window = sg.Window('Get The Weather', layout)    
+    window = sg.Window('Get The Weather', layout, size=(400, 350))    
 
     # Start the event loop
     while True:
@@ -102,6 +102,8 @@ def buildWeatherURL(month=None, day=None, year=None, airport=None, filter=None):
         return {"link": link, "filter": filter}
     else:
         sg.popup('Farewell')
+
+        return None
 
 def create_table(table_name, toprow, rows):
     sg.set_options(font=("Arial Bold", 14))

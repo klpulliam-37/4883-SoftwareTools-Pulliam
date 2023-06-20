@@ -1,5 +1,6 @@
 import csv
 
+# Creates list of airport codes based on csv file
 def parse_codes():
     codes = []
 
@@ -10,5 +11,7 @@ def parse_codes():
 
     return codes
 
+# Testing
 if __name__=='__main__':
-    print(parse_codes())
+    pass
+    # print(parse_codes())

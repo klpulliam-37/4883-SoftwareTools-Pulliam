@@ -1,3 +1,10 @@
+"""
+Desription:
+    This program allows a user to input a day, month, and year to view the weather data of that day.
+    The user can also specify a filter to apply to the data such as daily, weekly, or monthly.
+    All of the data comes from wunderground.com.
+"""
+
 from gui import buildWeatherURL
 from extract import asyncGetWeather
 from extract import parse_daily
@@ -8,7 +15,7 @@ if __name__=='__main__':
     url = buildWeatherURL()
 
     # Parse the data and display the results in a table
-    if url["filter"]:   # Check if url build status was successful before continuing
+    if url:
         page = asyncGetWeather(url["link"])
 
         if url["filter"] == "daily":

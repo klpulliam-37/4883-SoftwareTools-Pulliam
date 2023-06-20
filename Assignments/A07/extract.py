@@ -29,13 +29,11 @@ def asyncGetWeather(url):
     https://stackoverflow.com/questions/76444501/typeerror-init-got-multiple-values-for-argument-options/76444544
     """
     
-    #change '/usr/local/bin/chromedriver' to the path of your chromedriver executable
-    # service = Service(executable_path='C:/repos/4883-SoftwareTools/chromedriver_win32')
-    # options = webdriver.ChromeOptions()
-    # options.add_argument('--headless')
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
     
-    # driver = webdriver.Chrome(service=service,options=options)  # run ChromeDriver
-    driver = webdriver.Chrome()  # run ChromeDriver
+    driver = webdriver.Chrome(options=options)  # run ChromeDriver
+    # driver = webdriver.Chrome()  # run ChromeDriver
 
     flushprint("Getting page...")
     driver.get(url)                                             # load the web page from the URL
@@ -46,22 +44,20 @@ def asyncGetWeather(url):
     driver.quit()                                               # quit ChromeDriver
     return render                                               # return the page source HTML
 
-# Function to be used as a filter in find_all
-def has_ngcontent(tag):
-    return tag.has_attr('_ngcontent-app-root-c210')
+# DEBUG PRINT
+# def print_html(html_data):
+#     if html_data is not None:
+#         print(html_data.prettify())
+#     else:
+#         print("There were no matches for the search")
 
-def print_html(html_data):
-    if html_data is not None:
-        print(html_data.prettify())
-    else:
-        print("There were no matches for the search")
-
-def print_list(html_data_list):
-    if html_data_list:
-        for item in html_data_list:
-            print(item.prettify())
-    else:
-        print("There were no matches for the search")
+# DEBUG PRINT
+# def print_list(html_data_list):
+#     if html_data_list:
+#         for item in html_data_list:
+#             print(item.prettify())
+#     else:
+#         print("There were no matches for the search")
 
 def parse_daily(page):
     # parse the HTML
@@ -121,7 +117,7 @@ def parse_daily(page):
 
     rows = tbody.find_all("tr") 
 
-    # r = 0
+    # Iterates through table body html to extract data
     c = 1
     for row in rows:
         columns = row.find_all("td")
@@ -136,12 +132,12 @@ def parse_daily(page):
                 observations[cat[c]].append(data_tag.get_text().strip())
             c += 1
         c = 1
-        # r += 1 # just for checking number of rows in table since they vary
-    # print(f"There are {r} row(s)")
 
+    # Store data in file
     with open("wunder_daily.json","w") as f:
         json.dump(observations,f,indent=4)
     
+    # Display data in a gui table
     display_daily_results()
 
     
@@ -242,11 +238,10 @@ def parse_weekly_monthly(page, filter):
     for table in tables:
         rows = table.find_all("tr")
 
-
+        # Iterates through table body html to extract data
         for row in rows[1:]:
             data_tags = row.find_all("td")
             for data_tag in data_tags:
-                # print(data_tag.get_text())
                 if i_cat == 0:
                     observations["time"].append(data_tag.get_text().strip())
                 elif i_cat > 0 and i_cat < 6:
@@ -255,18 +250,16 @@ def parse_weekly_monthly(page, filter):
                 else:
                     observations["precipitation"].append(data_tag.get_text().strip())
             i_tag = 0
-        # print("Table " + str(i) + ":")
-        # print_list(rows)
-        # i += 1
         i_cat += 1
 
+    # Store data in file and display results based on the type of filter
     if filter == "w":
-        # Need to update this so it stores file in proper directory
+        # Need to update this so it stores file in different directory
         with open("wunder_weekly.json","w") as f:
             json.dump(observations,f,indent=4)
         display_weekly_monthly_results("w")
     elif filter == "m":
-        # Need to update this so it stores file in proper directory
+        # Need to update this so it stores file in different directory
         with open("wunder_monthly.json","w") as f:
             json.dump(observations,f,indent=4)
         display_weekly_monthly_results("m")
@@ -274,9 +267,10 @@ def parse_weekly_monthly(page, filter):
         print("A valid filter type was not provided.")
 
 
-    
+# Testing
 if __name__=='__main__':
-
+    pass
+    """
     # Could be a good idea to use the buildWeatherURL function from gui.py
     # url_daily = 'http://www.wunderground.com/history/daily/KCHO/date/2020-12-31'
     # url_weekly = 'http://www.wunderground.com/history/weekly/KCHO/date/2020-12-31'
@@ -304,3 +298,4 @@ if __name__=='__main__':
     tables = tbody[0].find_all("table")
 
     parse_weekly_monthly(tables, "m")
+    """
