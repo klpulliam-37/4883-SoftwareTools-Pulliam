@@ -10,8 +10,8 @@
 ### <p>&nbsp;</p>
 
 # My Experience with NCurses
-## NCurses vs PDCurses
-### PDCurses is the Windows port for NCurses. <br> NCurses is less difficult to use compared to PDCurses. PDCurses is not very user friendly.
+## NCurses (New Curses) vs PDCurses (Public Domain Curses)
+### Both of them are continuations of curses, and offer ports to Windows systems. However, I've read online that NCurses is more user friendly than PDCurses. <br>
 ## Windows Subsystem for Linux (WSL)
 ### Due to NCurses being only available for Linux, I had to install WSL in order to use it since I don't own any hardware running a Linux system. <br>
 ### The distribution I used was Ubuntu 22.04.2 LTS which was availble in the Microsoft Store.
