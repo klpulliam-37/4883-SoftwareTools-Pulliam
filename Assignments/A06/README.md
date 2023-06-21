@@ -28,10 +28,10 @@
 <!-- https://www.youtube.com/watch?v=YgNVkB8cI80 -->
 <!-- Allows user to place windows wherever they want. -->
 ### NetHack (NCurses Interface Version)
-<img src="images/nethackNCurses.gif"  width=960>
+<img src="images/nethackncurses.gif"  width=960>
 
 <!-- Source -->
 <!-- https://www.youtube.com/watch?v=LgvLfR2zG3g&list=PLTTuTDBxpjWjnSc316lTqKRyUuN1yu1uM&index=15&t=1s -->
 <!-- Creates own graphics library to visualize a 3D game using NCurses to place pixels anywhere in terminal. -->
 ### 3D Terminal Game (by KayOS Code on YouTube)
-<img src="images/NCursesgame.gif"  width=960>
+<img src="images/ncursesgame.gif"  width=960>
