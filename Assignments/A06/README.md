@@ -16,6 +16,13 @@
 ### Due to NCurses being only available for Linux, I had to install WSL in order to use it since I don't own any hardware running a Linux system. <br>
 ### The distribution I used was Ubuntu 22.04.2 LTS which was availble in the Microsoft Store.
 
+# My Workflow
+### include <ncurses> <br>
+### Write the code (cpp) <br>
+### Open WSL with chosen Linux distro <br>
+### Run a makefile, or chosen build system <br>
+### Execute code (Unless handled in makefile) <br>
+
 ### <p>&nbsp;</p>
 
 # Examples
