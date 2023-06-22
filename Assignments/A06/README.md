@@ -7,11 +7,17 @@
 ### NCurses is an open source library that can be used to create user interfaces that run under a terminal emulator.<br>
 ### A couple examples of NCurses's capabilites are moving the cursor to any point in the terminal, and changing the color of the text and background.
 
+## Alternatives
+### Final Cut
+
 ### <p>&nbsp;</p>
 
+## How to Install NCurses
+### Step 1:
+
 # My Experience with NCurses
-## NCurses vs PDCurses
-### PDCurses is the Windows port for NCurses. <br> NCurses is less difficult to use compared to PDCurses. PDCurses is not very user friendly.
+## NCurses (New Curses) vs PDCurses (Public Domain Curses)
+### Both of them are continuations of curses, and offer ports to Windows systems. However, I've read online that NCurses is more user friendly than PDCurses. <br>
 ## Windows Subsystem for Linux (WSL)
 ### Due to NCurses being only available for Linux, I had to install WSL in order to use it since I don't own any hardware running a Linux system. <br>
 ### The distribution I used was Ubuntu 22.04.2 LTS which was availble in the Microsoft Store.
@@ -25,11 +31,20 @@
 
 ### <p>&nbsp;</p>
 
+# My Workflow 
+### include ncurses library <br>
+### Write the code (cpp) <br>
+### Open WSL with chosen Linux distro <br>
+### Run a makefile, or chosen build system <br>
+### Exeute code (Unless handled in makefile) <br>
+
 # Examples
 <!-- Source -->
 <!-- https://htop.dev/images/htop-2.0.png -->
 ### htop (Interactive Process Viewer for Linux)
 <img src="images/htop.png"  width=960>
+
+### Nano (Text Editor for Linux Terminals)
 
 <!-- Source -->
 <!-- https://www.youtube.com/watch?v=YgNVkB8cI80 -->
