@@ -29,13 +29,6 @@
 <!-- ## How to Install NCurses
 ### Step 1: -->
 
-# My Workflow
-### Include the NCurses library into your program. <br>
-### Write your code. <br>
-### Open WSL with chosen Linux distro. <br>
-### Use a makefile, or chosen build system to compile code and link ncurses library. You could also compile and link everything manually if you wanted to. <br>
-### Run your program executable. <br>
-
 ### <p>&nbsp;</p>
 
 # Example Code
