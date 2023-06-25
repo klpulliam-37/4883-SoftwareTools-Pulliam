@@ -60,6 +60,19 @@
 ### NetHack (NCurses Interface Version)
 <img src="images/nethackncurses.gif"  width=960>
 
+### Alien: Isolation Console Remake
+### Original Splash Screen
+<img src="images/og_alien1.jpg"  width=960>
+
+### Remake Splash Screen
+<img src="images/ncurses_alien1.png"  width=960>
+
+### Original Personal Screen
+<img src="images/og_alien2.jpg"  width=960>
+
+### Remake Personal Screen
+<img src="images/ncurses_alien2.png"  width=960>
+
 <!-- Source -->
 <!-- https://www.youtube.com/watch?v=LgvLfR2zG3g&list=PLTTuTDBxpjWjnSc316lTqKRyUuN1yu1uM&index=15&t=1s -->
 <!-- Creates own graphics library to visualize a 3D game using NCurses to place pixels anywhere in terminal. -->
