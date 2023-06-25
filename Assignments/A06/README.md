@@ -47,13 +47,13 @@
 
 # Example Code
 ### Main Code
-<img src="images/code1.png"  width=240>
+<img src="images/code1.png"  width=480>
 
 ### Cursor Placement Code
 <img src="images/code2.png"  width=720>
 
 ### Result
-<img src="images/output1.png"  width=960>
+<img src="images/output1.png"  width=1200>
 
 ### Bordered Window Code
 <img src="images/code3.png"  width=720>
