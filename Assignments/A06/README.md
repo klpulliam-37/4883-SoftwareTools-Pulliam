@@ -3,18 +3,30 @@
 ## What is NCurses?
 ### NCurses is a clone of the original System V Release 4.0 (SVr4) curses. <br> The name Curses was used in place of "Cursor Optimization" and NCurses stands for "New Curses".
 
+### <p>&nbsp;</p>
+
 ## History/Background
 ### Back in the good ole days if you wanted a terminal (computer) to perform a specific task, such as print a line of text, you would need to use escape sequences. <br>
 ### These sequences are special charcter codes that allow a terminal to perform certain actions. Of course as time went on, different terminals would require different characters codes to interact with it. <br>
 ### With this, the designers of UNIX invented the 'termcap' conecpt which later became 'terminfo'. It is a file that provides all of the capabilities that a terminal may have, as well as the escape sequences required to trigger these effects. <br>
 
+### <p>&nbsp;</p>
+
 ## Where does NCurses fit into this?
 ### The original Curses library is essentially a wrapper that prevents someone from having to deal with raw terminal codes. Now although NCurses is a clone of the original Curses library, it also provides a framework to create better looking Text-based User Interfaces (TUIs).
 ### A few examples of NCurses's capabilites include moving the cursor to any point in the terminal, changing the color of the text and background, and handling events for mouse interaction.
 
+### <p>&nbsp;</p>
+
 ## Alternatives
-### Final Cut
-### Offers the same functionality as NCurses with some differences being Final Cut was written in C++ while NCurses was written in C, and NCurses is still more popular than Final Cut as of recently.
+### FINAL CUT
+### C++ Library
+### Unix-like Systems
+
+### termbox
+### C Library - Has a Python module as well
+### Linux Systems
+
 
 ### <p>&nbsp;</p>
 
@@ -25,9 +37,6 @@
 ### Before I realized that there was a port developed for NCurses to Windows and MinGW32, I figured NCurses was only available on Linux systems. <br> 
 ### To use NCurses this way, I had to install WSL in order to use it since I don't own any hardware running a Linux system. <br>
 ### The distribution I used was Ubuntu 22.04.2 LTS which was availble in the Microsoft Store.
-
-<!-- ## How to Install NCurses
-### Step 1: -->
 
 ### <p>&nbsp;</p>
 
@@ -44,6 +53,7 @@
 ### Result
 <img src="images/output2.png"  width=960>
 
+### <p>&nbsp;</p>
 
 # Applications built using NCurses
 <!-- Source -->
