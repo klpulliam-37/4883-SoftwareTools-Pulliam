@@ -1,7 +1,7 @@
 # NCurses
 
 ## What is NCurses?
-### NCurses is a clone of the original System V Release 4.0 (SVr4) curses. <br> The name Curses was used in place of "Cursor Optimization" and NCurses stands for "New Curses".
+### NCurses is a clone of the original System V Release 4.0 (SVr4) Curses. <br> The name Curses is supposd to be a pun on "Cursor Optimization" and NCurses stands for "New Curses".
 
 ### <p>&nbsp;</p>
 
@@ -23,6 +23,8 @@
 ### C++ Library
 ### Unix-like Systems
 
+### <p>&nbsp;</p>
+
 ### termbox
 ### C Library - Has a Python module as well
 ### Linux Systems
@@ -33,6 +35,9 @@
 # My Experience with NCurses
 ## NCurses (New Curses) vs PDCurses (Public Domain Curses)
 ### Both of them are continuations of curses, and offer ports to Windows systems. However, I've read online that NCurses is more stable, more user friendly, and offers functionality such as menu and form support whereas PDCurses does not.<br>
+
+### <p>&nbsp;</p>
+
 ## Windows Subsystem for Linux (WSL)
 ### Before I realized that there was a port developed for NCurses to Windows and MinGW32, I figured NCurses was only available on Linux systems. <br> 
 ### To use NCurses this way, I had to install WSL in order to use it since I don't own any hardware running a Linux system. <br>
@@ -41,14 +46,17 @@
 ### <p>&nbsp;</p>
 
 # Example Code
-### Hello World Code
-<img src="images/code1.png"  width=720>
+### Main Code
+<img src="images/code1.png"  width=240>
+
+### Cursor Placement Code
+<img src="images/code2.png"  width=720>
 
 ### Result
-<img src="images/output1.jpg"  width=960>
+<img src="images/output1.png"  width=960>
 
 ### Bordered Window Code
-<img src="images/code2.png"  width=720>
+<img src="images/code3.png"  width=720>
 
 ### Result
 <img src="images/output2.png"  width=960>
