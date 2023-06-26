@@ -69,6 +69,9 @@
 ### htop (Interactive Process Viewer for Linux)
 <img src="images/htop.png"  width=960>
 
+### w3m (Text-based Web Browser)
+<img src="images/w3m.png"  width=720>
+
 ### Nano (Text Editor for Linux Terminals)
 <img src="images/nano_logo.jpg"  width=960>
 
