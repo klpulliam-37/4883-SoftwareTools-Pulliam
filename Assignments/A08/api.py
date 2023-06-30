@@ -4,6 +4,7 @@ from fastapi.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import csv
+from datetime import datetime
 
 
 
@@ -35,29 +36,67 @@ with open('data.csv', 'r') as file:
         db.append(row)
 
 
-def getUniqueCountries():
+def get_unique_countries():
     global db
     countries = {}
 
     for row in db:
-        # print(row)
         if not row[2] in countries:
             countries[row[2]] = 0
 
     return list(countries.keys())
 
-def getUniqueWhos():
+def get_unique_regions():
     global db
-    whos = {}
+    regions = {}
 
     for row in db:
-        # print(row)
-        if not row[3] in whos:
-            whos[row[3]] = 0
+        if not row[3] in regions:
+            regions[row[3]] = 0
    
-    return list(whos.keys())
+    return list(regions.keys())
 
-def getTotalDeaths():
+def get_deaths():
+    try:
+        deaths = 0            
+
+        for row in db:            
+            deaths += int(row[6])
+
+        return {"data":deaths,"success":True,"message":"Total Deaths"}
+
+    except Exception as e:
+        return {"success":False,"error": str(e)}
+
+def get_deaths_by_all_countries():
+    try:
+        deaths = {}            
+
+        for row in db:
+            if not row[2] in deaths:
+                deaths[row[2]] = 0
+            
+            deaths[row[2]] += int(row[6])
+
+        return {"data":deaths,"success":True,"message":"Deaths by Country"}
+
+    except Exception as e:
+        return {"success":False,"error": str(e)}
+
+def get_deaths_by_country(country):
+    try:
+        deaths = {f"{country}": 0}
+
+        for row in db:
+            if row[2] == country:
+                deaths[country] += int(row[6])
+
+        return {"data": deaths, "success": True, "message": "Deaths by Country", "params": {"country": f"{country}"}}
+
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+    
+def get_deaths_by_all_regions():
     try:
         deaths = {}            
 
@@ -67,10 +106,49 @@ def getTotalDeaths():
             
             deaths[row[3]] += int(row[6])
 
-        return {"data":deaths,"success":True,"message":"Deaths by Country"}
+        return {"data":deaths,"success":True,"message":"Deaths by Region"}
 
     except Exception as e:
         return {"success":False,"error": str(e)}
+
+def get_deaths_by_region(region):
+    try:
+        deaths = {"deaths": 0}
+
+        for row in db:
+            if row[3] == region:
+                deaths[region] += int(row[6])
+
+        return {"data":deaths,"success":True,"message":"Deaths by Region", "params": {"region": f"{region}"}}
+
+    except Exception as e:
+        return {"success":False,"error": str(e)}
+
+def get_deaths_by_country_year(country, year):
+    try:
+        deaths = {"deaths": 0}
+
+        for row in db:
+            if row[2] == country and row[0][:4] == year:
+                deaths["deaths"] += int(row[6])
+
+        return {"data":deaths,"success":True,"message":"Deaths by Country and Year", "params": {"region": f"{country}", "year": f"{year}"}}
+
+    except Exception as e:
+        return {"success":False,"error": str(e)}
+
+def get_deaths_by_region_year(region, year):
+    try:
+        deaths = {"deaths": 0}
+
+        for row in db:
+            if row[3] == region and row[0][:4] == year:
+                deaths["deaths"] += int(row[6])
+
+        return {"data":deaths,"success":True,"message":"Deaths by Region and Year", "params": {"region": f"{region}", "year": f"{year}"}}
+
+    except Exception as e:
+        return {"success":False,"error": str(e), "params": {"region": f"{region}", "year": f"{year}"}}
 
 """
  
@@ -96,22 +174,18 @@ async def docs_redirect():
 @app.get("/countries/")
 async def countries():
 
-    return {"countries":getUniqueCountries()}
+    return get_unique_countries()
 
 
-@app.get("/whos/")
-async def whos():
+@app.get("/regions/")
+async def regions():
 
-    return {"whos":getUniqueWhos()}
+    return get_unique_regions()
 
 @app.get("/casesByRegion/")
 async def casesByRegion(year:int = None):
     """
-    Returns the number of cases by region
-    ## Hello world
-    - 1
-    - 2
-    - 3
+    Returns the number of cases by region.
     """
 
     cases = {}
@@ -147,31 +221,32 @@ async def casesByRegion(year:int = None):
 async def deaths():
     """Gets the total number of deaths."""
 
-    return getTotalDeaths()
+    return get_deaths()
     
-@app.get("/deaths_by_country")
-async def deaths_by_country():
-    """Gets the total number of deaths."""
+@app.get("/deaths_by_country/{country}")
+async def deaths_by_country(country: str):
+    """Gets the total number of deaths by country."""
 
+    return get_deaths_by_country(country)
     
     
-@app.get("/deaths_by_country")
-async def deaths_by_country():
-    """Gets the total number of deaths."""
+@app.get("/deaths_by_region/{region}")
+async def deaths_by_region(region: str):
+    """Gets the total number of deaths by region."""
 
-    try:
-        deaths = {}            
+    return get_deaths_by_region(region)
 
-        for row in db:
-            if not row[3] in deaths:
-                deaths[row[3]] = 0
-            
-            deaths[row[3]] += int(row[6])
+@app.get("/deaths_by_country_year/{country}/{year}")
+async def deaths_by_country_year(country: str, year: str):
+    """Gets the total number of deaths by country and year."""
 
-        return {"data":deaths,"success":True,"message":"Deaths by Country"}
+    return get_deaths_by_country_year(country, year)
 
-    except Exception as e:
-        return {"success":False,"error": str(e)}
+@app.get("/deaths_by_region_year/{region}/{year}")
+async def deaths_by_region_year(region: str, year: str):
+    """Gets the total number of deaths by region and year."""
+
+    return get_deaths_by_region_year(region, year)
 
 
 """
