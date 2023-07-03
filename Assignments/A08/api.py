@@ -149,6 +149,100 @@ def get_deaths_by_region_year(region, year):
 
     except Exception as e:
         return {"success":False,"error": str(e), "params": {"region": f"{region}", "year": f"{year}"}}
+    
+def get_cases():
+    try:
+        cases = 0            
+
+        for row in db:            
+            cases += int(row[6])
+
+        return {"data":cases,"success":True,"message":"Total cases"}
+
+    except Exception as e:
+        return {"success":False,"error": str(e)}
+
+def get_cases_by_all_countries():
+    try:
+        cases = {}            
+
+        for row in db:
+            if not row[2] in cases:
+                cases[row[2]] = 0
+            
+            cases[row[2]] += int(row[6])
+
+        return {"data":cases,"success":True,"message":"cases by Country"}
+
+    except Exception as e:
+        return {"success":False,"error": str(e)}
+
+def get_cases_by_country(country):
+    try:
+        cases = {f"{country}": 0}
+
+        for row in db:
+            if row[2] == country:
+                cases[country] += int(row[6])
+
+        return {"data": cases, "success": True, "message": "cases by Country", "params": {"country": f"{country}"}}
+
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+    
+def get_cases_by_all_regions():
+    try:
+        cases = {}            
+
+        for row in db:
+            if not row[3] in cases:
+                cases[row[3]] = 0
+            
+            cases[row[3]] += int(row[6])
+
+        return {"data":cases,"success":True,"message":"cases by Region"}
+
+    except Exception as e:
+        return {"success":False,"error": str(e)}
+
+def get_cases_by_region(region):
+    try:
+        cases = {"cases": 0}
+
+        for row in db:
+            if row[3] == region:
+                cases[region] += int(row[6])
+
+        return {"data":cases,"success":True,"message":"cases by Region", "params": {"region": f"{region}"}}
+
+    except Exception as e:
+        return {"success":False,"error": str(e)}
+
+def get_cases_by_country_year(country, year):
+    try:
+        cases = {"cases": 0}
+
+        for row in db:
+            if row[2] == country and row[0][:4] == year:
+                cases["cases"] += int(row[6])
+
+        return {"data":cases,"success":True,"message":"cases by Country and Year", "params": {"region": f"{country}", "year": f"{year}"}}
+
+    except Exception as e:
+        return {"success":False,"error": str(e)}
+
+def get_cases_by_region_year(region, year):
+    try:
+        cases = {"cases": 0}
+
+        for row in db:
+            if row[3] == region and row[0][:4] == year:
+                cases["cases"] += int(row[6])
+
+        return {"data":cases,"success":True,"message":"cases by Region and Year", "params": {"region": f"{region}", "year": f"{year}"}}
+
+    except Exception as e:
+        return {"success":False,"error": str(e), "params": {"region": f"{region}", "year": f"{year}"}}
 
 """
  
@@ -264,6 +358,37 @@ async def deaths_by_region_year(region: str, year: str):
                                                                                                            
  
 """
+
+@app.get("/cases")
+async def cases():
+    """Gets the total number of cases."""
+
+    return get_cases()
+    
+@app.get("/cases_by_country/{country}")
+async def cases_by_country(country: str):
+    """Gets the total number of cases by country."""
+
+    return get_cases_by_country(country)
+    
+    
+@app.get("/cases_by_region/{region}")
+async def cases_by_region(region: str):
+    """Gets the total number of cases by region."""
+
+    return get_cases_by_region(region)
+
+@app.get("/cases_by_country_year/{country}/{year}")
+async def cases_by_country_year(country: str, year: str):
+    """Gets the total number of cases by country and year."""
+
+    return get_cases_by_country_year(country, year)
+
+@app.get("/cases_by_region_year/{region}/{year}")
+async def cases_by_region_year(region: str, year: str):
+    """Gets the total number of cases by region and year."""
+
+    return get_deaths_by_region_year(region, year)
 
 """
  
