@@ -139,7 +139,7 @@ def get_deaths_by_region(region):
 
         for row in db:
             if row[3] == region:
-                deaths[region] += int(row[6])
+                deaths["deaths"] += int(row[6])
 
         return {"data":deaths,"success":True,"message":"Deaths by Region", "params": {"region": f"{region}"}}
 
@@ -286,7 +286,7 @@ def get_max_deaths_by_years(year1, year2):
 
 
 def get_min_deaths():
-    countries = get_deaths_all_countries_by_years()
+    countries = get_deaths_by_all_countries()
     data = countries["data"]
 
     _min = min(data, key = data.get)
@@ -310,7 +310,7 @@ def get_avg_deaths():
     for country in data:
         sum += data[country]
     
-    return floor(sum / len(data))
+    return {"avg_deaths": floor(sum / len(data))}
 
 """
  
@@ -464,7 +464,7 @@ async def max_deaths():
 
 @app.get("/max_deaths_by_years/{year1}/{year2}")
 async def max_deaths_by_years(year1: int, year2: int):
-    """Gets the country with the most deaths, and how many there were between given years."""
+    """Gets the country with the most deaths, and how many there were between given years. Year order does not matter."""
 
     return get_max_deaths_by_years(year1, year2)
 
@@ -476,7 +476,7 @@ async def min_deaths():
 
 @app.get("/min_deaths_by_years/{year1}/{year2}")
 async def min_deaths_by_years(year1: int, year2: int):
-    """Gets the country with the least deaths, and how many there were between given years."""
+    """Gets the country with the least deaths, and how many there were between given years. Year order does not matter."""
 
     return get_min_deaths_by_years(year1, year2)
 
