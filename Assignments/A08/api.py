@@ -5,6 +5,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 import csv
 from datetime import datetime
+from math import floor
 
 
 
@@ -56,6 +57,7 @@ def get_unique_regions():
    
     return list(regions.keys())
 
+# ============================== DEATHS HELPER ============================== #
 def get_deaths():
     try:
         deaths = 0            
@@ -77,6 +79,26 @@ def get_deaths_by_all_countries():
                 deaths[row[2]] = 0
             
             deaths[row[2]] += int(row[6])
+
+        return {"data":deaths,"success":True,"message":"Deaths by Country"}
+
+    except Exception as e:
+        return {"success":False,"error": str(e)}
+    
+def get_deaths_all_countries_by_years(year1, year2):
+    try:
+        years = [year1, year2]
+        max_year = max(years)
+        min_year = min(years)
+
+        deaths = {}            
+
+        for row in db:
+            if not row[2] in deaths:
+                deaths[row[2]] = 0
+            
+            if row[0][:4] >= str(min_year) and row[0][:4] <= str(max_year):
+                deaths[row[2]] += int(row[6])
 
         return {"data":deaths,"success":True,"message":"Deaths by Country"}
 
@@ -150,12 +172,13 @@ def get_deaths_by_region_year(region, year):
     except Exception as e:
         return {"success":False,"error": str(e), "params": {"region": f"{region}", "year": f"{year}"}}
     
+# ============================== CASES HELPER ============================== #
 def get_cases():
     try:
         cases = 0            
 
         for row in db:            
-            cases += int(row[6])
+            cases += int(row[4])
 
         return {"data":cases,"success":True,"message":"Total cases"}
 
@@ -170,7 +193,7 @@ def get_cases_by_all_countries():
             if not row[2] in cases:
                 cases[row[2]] = 0
             
-            cases[row[2]] += int(row[6])
+            cases[row[2]] += int(row[4])
 
         return {"data":cases,"success":True,"message":"cases by Country"}
 
@@ -183,7 +206,7 @@ def get_cases_by_country(country):
 
         for row in db:
             if row[2] == country:
-                cases[country] += int(row[6])
+                cases[country] += int(row[4])
 
         return {"data": cases, "success": True, "message": "cases by Country", "params": {"country": f"{country}"}}
 
@@ -198,7 +221,7 @@ def get_cases_by_all_regions():
             if not row[3] in cases:
                 cases[row[3]] = 0
             
-            cases[row[3]] += int(row[6])
+            cases[row[3]] += int(row[4])
 
         return {"data":cases,"success":True,"message":"cases by Region"}
 
@@ -211,12 +234,12 @@ def get_cases_by_region(region):
 
         for row in db:
             if row[3] == region:
-                cases[region] += int(row[6])
+                cases["cases"] += int(row[4])
 
         return {"data":cases,"success":True,"message":"cases by Region", "params": {"region": f"{region}"}}
 
     except Exception as e:
-        return {"success":False,"error": str(e)}
+        return {"success":False,"error": str(e), "params": {"region": f"{region}"}}
 
 def get_cases_by_country_year(country, year):
     try:
@@ -224,7 +247,7 @@ def get_cases_by_country_year(country, year):
 
         for row in db:
             if row[2] == country and row[0][:4] == year:
-                cases["cases"] += int(row[6])
+                cases["cases"] += int(row[4])
 
         return {"data":cases,"success":True,"message":"cases by Country and Year", "params": {"region": f"{country}", "year": f"{year}"}}
 
@@ -237,12 +260,57 @@ def get_cases_by_region_year(region, year):
 
         for row in db:
             if row[3] == region and row[0][:4] == year:
-                cases["cases"] += int(row[6])
+                cases["cases"] += int(row[4])
 
         return {"data":cases,"success":True,"message":"cases by Region and Year", "params": {"region": f"{region}", "year": f"{year}"}}
 
     except Exception as e:
         return {"success":False,"error": str(e), "params": {"region": f"{region}", "year": f"{year}"}}
+    
+# ============================== AGGREGATE HELPER ============================== #
+def get_max_deaths():
+    countries = get_deaths_by_all_countries()
+    data = countries["data"]
+
+    _max = max(data, key = data.get)
+    
+    return {_max: data[_max]}
+
+def get_max_deaths_by_years(year1, year2):
+    countries = get_deaths_all_countries_by_years(year1, year2)
+    data = countries["data"]
+
+    _max = max(data, key = data.get)
+    
+    return {_max: data[_max]}
+
+
+def get_min_deaths():
+    countries = get_deaths_all_countries_by_years()
+    data = countries["data"]
+
+    _min = min(data, key = data.get)
+    
+    return {_min: data[_min]}
+
+def get_min_deaths_by_years(year1, year2):
+    countries = get_deaths_all_countries_by_years(year1, year2)
+    data = countries["data"]
+
+    _min = min(data, key = data.get)
+    
+    return {_min: data[_min]}
+
+def get_avg_deaths():
+    countries = get_deaths_by_all_countries()
+    data = countries["data"]
+
+    sum = 0
+    
+    for country in data:
+        sum += data[country]
+    
+    return floor(sum / len(data))
 
 """
  
@@ -275,24 +343,6 @@ async def countries():
 async def regions():
 
     return get_unique_regions()
-
-@app.get("/casesByRegion/")
-async def casesByRegion(year:int = None):
-    """
-    Returns the number of cases by region.
-    """
-
-    cases = {}
-    
-    for row in db:
-        if year != None and year != int(row[0][:4]):
-            continue
-            
-        if not row[3] in cases:
-            cases[row[3]] = 0
-        cases[row[3]] += int(row[4])    
-
-    return {"data":cases,"success":True,"message":"Cases by Region","size":len(cases),"year":year}
 
 
 """
@@ -406,6 +456,35 @@ async def cases_by_region_year(region: str, year: str):
  
 """
 
+@app.get("/max_deaths")
+async def max_deaths():
+    """Gets the country with the most deaths, and how many there were."""
+
+    return get_max_deaths()
+
+@app.get("/max_deaths_by_years/{year1}/{year2}")
+async def max_deaths_by_years(year1: int, year2: int):
+    """Gets the country with the most deaths, and how many there were between given years."""
+
+    return get_max_deaths_by_years(year1, year2)
+
+@app.get("/min_deaths")
+async def min_deaths():
+    """Gets the country with the least deaths, and how many there were."""
+
+    return get_min_deaths()
+
+@app.get("/min_deaths_by_years/{year1}/{year2}")
+async def min_deaths_by_years(year1: int, year2: int):
+    """Gets the country with the least deaths, and how many there were between given years."""
+
+    return get_min_deaths_by_years(year1, year2)
+
+@app.get("/avg_deaths")
+async def avg_deaths():
+    """Gets the average deaths between all countries."""
+
+    return get_avg_deaths()
 
 
 my_list = ['apple', 'banana', 'cherry', 'date', 'elderberry']
