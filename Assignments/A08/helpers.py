@@ -38,6 +38,7 @@ def get_unique_regions():
 
 # ============================== DEATHS HELPER ============================== #
 def get_deaths():
+    # Loop through db and sum the total deaths across all countries and regions
     try:
         deaths = 0            
 
@@ -50,6 +51,7 @@ def get_deaths():
         return {"success":False,"error": str(e)}
 
 def get_deaths_by_all_countries():
+    # Loop through db and sum total deaths based on each country
     try:
         deaths = {}            
 
